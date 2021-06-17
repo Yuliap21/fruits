@@ -25,7 +25,52 @@ app.use((req, res, next) => {
   console.log('**********************')
   next()
 })
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true })) // Without this half my code wont work because i need req.body
+
+
+/****
+Dummy Code
+For now
+*****/
+app.post('/products', (req, res) => {
+  console.log('Create route accessed');
+  console.log('Req.body is:', req.body);
+  res.send(req.body)
+})
+/****
+End Dummy Code
+*****/
+
+
+
+
+/***
+SEED ROUTE
+****/
+app.get('/fruits/seed', (req, res) => {
+  Fruit.create([
+    {
+            name:'grapefruit',
+            color:'pink',
+            readyToEat:true
+        },
+        {
+            name:'grape',
+            color:'purple',
+            readyToEat:false
+        },
+        {
+            name:'avocado',
+            color:'green',
+            readyToEat:true
+        }
+  ], (err, data) => {
+    res.redirect('/fruits')
+  })
+});
+
+
+
 /*****************
 INDUCES Routes
 ******************/

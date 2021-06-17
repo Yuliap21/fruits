@@ -1,4 +1,5 @@
 const React = require('react');
+const DefaultLayout = require('./layouts/Default');
 const h1Style = {
   color: '#ffffff',
   backgroundColor: '#000000',
@@ -7,7 +8,7 @@ class Index extends React.Component {
   render(){
     const fruits = this.props.fruits;
     return (
-      <div>
+      <DefaultLayout title={"Fruits Index Page"}>
         <h1 style={h1Style}>Fruits Index Page</h1>
         <nav>
           <a href="/fruits/new">Create a New Fruit</a>
@@ -29,7 +30,7 @@ class Index extends React.Component {
             })
           }
         </ul>
-      </div>
+      </DefaultLayout>
     )
   }
 }
