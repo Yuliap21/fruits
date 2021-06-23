@@ -10,7 +10,7 @@ class Index extends React.Component {
     return (
       <DefaultLayout title={"Fruits Index Page"}>
         <h1 style={h1Style}>Fruits Index Page</h1>
-        <nav>
+        <nav className="superman">
           <a href="/fruits/new">Create a New Fruit</a>
         </nav>
         <ul>
@@ -25,6 +25,10 @@ class Index extends React.Component {
                     '  It is ready to eat':
                     '  It is NASTY!!!!!!'
                   }
+                  <form method="POST" action={`/fruits/${fruit._id}?_method=DELETE`}>
+                          <input type="submit" value="DELETE"/>
+                  </form>
+                  <a href={`/fruits/${fruit._id}/edit`}>Edit This Fruit</a>
                 </li>
               )
             })

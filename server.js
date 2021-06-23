@@ -1,7 +1,7 @@
 require('dotenv').config()
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const Fruit = require('./models/fruit')
 
 /*******
@@ -27,7 +27,9 @@ app.use((req, res, next) => {
 })
 app.use(express.urlencoded({ extended: true })) // Without this half my code wont work because i need req.body
 
+const methodOverride = require('method-override');
 
+app.use(methodOverride('_method'));
 /****
 Dummy Code
 For now
@@ -99,9 +101,43 @@ app.get('/fruits/new', (req, res) => {
 /*
 Delete
 */
+app.delete('/fruits/:id', (req, res) => {
+  Fruit.findByIdAndDelete(req.params.id, (err, foundFruit)=>{
+    if(err){
+      res.status(404).send({
+          msg: err.message
+      })
+    } else {
+      res.redirect('/fruits')
+    }
+  })
+})
+
+
 /*
 Update
 */
+app.put('/fruits/:id', (req, res) => {
+  if(req.body.readyToEat === 'on'){
+    req.body.readyToEat = true;
+  } else {
+    req.body.readyToEat = false;
+  }
+  Fruit.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedFruit)=>{
+    if(err){
+      res.status(404).send({
+          msg: err.message
+      })
+    } else {
+      res.render('Show', {
+        fruit: updatedFruit
+      })
+    }
+  })
+})
+
+
+
 /*
 Create
 */
@@ -126,7 +162,19 @@ Fruit.create(req.body, (err, createFruit) => {
 /*
 Edit
 */
-
+app.get('/fruits/:id/edit', (req, res) => {
+  Fruit.findById(req.params.id, (err, foundFruit)=>{
+    if(err){
+      res.status(404).send({
+          msg: err.message
+      })
+    } else {
+      res.render('Edit', {
+        fruit: foundFruit
+      })
+    }
+  })
+})
 /*
 Show
 */

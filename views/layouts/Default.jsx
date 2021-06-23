@@ -1,17 +1,16 @@
 const React = require('react');
 class DefaultLayout extends React.Component {
-  render(){
+  render() {
     return (
-      <html>
-        <head>
-          <title>{this.props.title}</title>
-        </head>
-        <body>
-          <h1>{this.props.title}</h1>
-          <h3>THIS IS WHERE CHILDREN Starts</h3>
-          {this.props.children}
-          <h3>THIS IS WHERE CHILDREN ENDS</h3>
-        </body>
+      <html lang="en" dir="ltr">
+          <head>
+            <meta charSet="utf-8" />
+            <title>{this.props.title}</title>
+          </head>
+          <body>
+            <h1>{this.props.title}</h1>
+            {this.props.children}
+          </body>
       </html>
     )
   }
