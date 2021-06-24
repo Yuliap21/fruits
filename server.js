@@ -30,6 +30,7 @@ app.use(express.urlencoded({ extended: true })) // Without this half my code won
 const methodOverride = require('method-override');
 
 app.use(methodOverride('_method'));
+app.use(express.static('public'));
 /****
 Dummy Code
 For now

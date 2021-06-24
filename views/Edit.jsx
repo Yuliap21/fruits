@@ -1,5 +1,6 @@
 const React = require('react');
 const DefaultLayout = require('./layouts/Default.jsx');
+
 class Edit extends React.Component {
   render(){
     return (
